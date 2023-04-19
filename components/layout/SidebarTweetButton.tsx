@@ -20,7 +20,7 @@ const SidebarTweetButton = () => {
                 bg-sky-500 hover:bg-opacity-90 
                 cursor-pointer transition">
                     <p className="hidden lg:block text-center font-semibold text-white text-[20px]">
-                        Tweet
+                        Scream
                     </p>
 
             </div>

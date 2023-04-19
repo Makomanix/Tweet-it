@@ -2,13 +2,23 @@ import useLoginModel from "@/hooks/useLoginModel";
 import { useCallback, useState } from "react";
 import Input from "../Input";
 import Model from "../Model";
+import useRegisterModel from "@/hooks/useRegisterModel";
 
 const LoginModel = () => {
     const loginModel = useLoginModel();
+    const registerModel = useRegisterModel();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    const onToggle = useCallback(() => {
+        if (isLoading) {
+            return;
+        }
+        loginModel.onClose();
+        registerModel.onOpen();
+    }, [isLoading, registerModel, loginModel]);
 
     const onSubmit = useCallback(async() => {
         try {
@@ -41,6 +51,22 @@ const LoginModel = () => {
         </div>
     )
 
+    const footerContent = (
+        <div className="text-neutral-400 text-center mt-4">
+            <p>First time using Screamer? 
+                <span 
+                    onClick={onToggle}
+                    className="
+                        text-white
+                        cursor-pointer
+                        hover:underline
+                    "
+                > Create an account
+                </span>
+            </p>
+        </div>
+    )
+
     return ( 
         <Model 
             disabled={isLoading}
@@ -50,6 +76,7 @@ const LoginModel = () => {
             onClose={loginModel.onClose}
             onSubmit={onSubmit}
             body={bodyContent}
+            footer={footerContent}
         /> 
     
     );
