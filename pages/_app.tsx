@@ -6,12 +6,14 @@ import type { AppProps } from 'next/app'
 import Layout from '@/components/Layout'
 import LoginModel from '@/components/models/LoginModel'
 import RegisterModel from '@/components/models/RegisterModel'
-// import Model from '@/components/Model'
+import EditModel from '@/components/models/EditModel';
+
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider session={pageProps.session}>
       <Toaster />
+      <EditModel />
       <RegisterModel />
       <LoginModel />
         <Layout>
