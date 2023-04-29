@@ -39,7 +39,8 @@ const ImageUpload: React.FC<DropzoneProps> = ({
         disabled,
         accept: {
             'image/jpeg': [],
-            'image/png': []
+            'image/png': [],
+            'image/JPG': []
         }
     })
 
