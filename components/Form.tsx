@@ -99,9 +99,7 @@ const Form: React.FC<FormProps> = ({
                 <div className="flex flex-row items-center justify-center gap-4">
                     <Button label="Login" onClick={loginModel.onOpen}/>
                     <Button label="Register" onClick={registerModel.onOpen} secondary/>
-
                 </div>
-
             </div>
         )}
     </div> 
