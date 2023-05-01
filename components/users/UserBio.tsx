@@ -1,11 +1,13 @@
 import { format } from 'date-fns';
 
-import useCurrentUser from "@/hooks/useCurrentUser";
-import useUser from "@/hooks/useUser";
 import React, { useMemo } from "react";
 import Button from '../Button';
 import { BiCalendar } from 'react-icons/bi';
+
+import useCurrentUser from "@/hooks/useCurrentUser";
+import useUser from "@/hooks/useUser";
 import useEditModel from '@/hooks/useEditModel';
+import useFollow from '@/hooks/useFollow';
 
 interface UserBioProps {
     userId: string;
@@ -18,6 +20,8 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
 
     const editModel = useEditModel()
 
+    const { isFollowing, toggleFollow } = useFollow(userId);
+
     const createdAt = useMemo(() => {
         if (!fetchedUser?. createdAt) {
             return null;
@@ -25,6 +29,8 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
 
         return format(new Date(fetchedUser.createdAt), 'MMMM yyyy');
     }, [fetchedUser?.createdAt])
+
+
     return ( 
         <div className='border-b-[1px] border-neutral-800 pb-4'>
             <div className='flex justify-end p-2'>
@@ -34,9 +40,11 @@ const UserBio: React.FC<UserBioProps> = ({ userId }) => {
                         onClick={editModel.onOpen} />
                 ) : (
                     <Button 
-                        onClick={() => {}}
-                        label='Follow'
-                        secondary/>
+                        onClick={toggleFollow}
+                        label={isFollowing ? 'Unfollow' : 'Follow'}
+                        secondary={!isFollowing}
+                        outline={isFollowing}
+                    />
                 )}
             </div>
             <div className='mt-8 px-4'>
